@@ -44,11 +44,16 @@ int main()
 {
 	Visualizer test;
 	
+	// all the current algorithms
+	void (*algorithms[])(std::vector<Item>&) = { bubbleSort, selectionSort };
+	
+	std::cout << "Pick an algorithm:\n1. Bubble Sort\n2. Selection Sort\nChoice: ";
+
 	// get input from user
 	int selection;
 	std::cin >> selection;
 	
-	test.sort(selectionSort);
+	test.sort(algorithms[selection - 1]);
 	test.show();
 	
 	return 0;
