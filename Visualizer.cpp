@@ -25,6 +25,8 @@ Visualizer::Visualizer() : window(sf::VideoMode(WIN_X, WIN_Y), "Sorting Visualiz
 
 Visualizer::~Visualizer()
 {
+	std::cout << "Deallocating" << std::endl;
+
 	// deallocate memory
 	for(int i = 0; i < SIZE; i++)
 	{
@@ -53,6 +55,7 @@ void Visualizer::sort(void (*sortingFunction)(std::vector<Item>&))
 
 void Visualizer::show()
 {
+	// make the drawing board
 	while(window.isOpen())
 	{
 		sf::Event event;
