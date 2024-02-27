@@ -26,7 +26,8 @@ Visualizer::Visualizer() : window(sf::VideoMode(WIN_X, WIN_Y), "Sorting Visualiz
 Visualizer::~Visualizer()
 {
 	std::cout << "Deallocating" << std::endl;
-
+	organizer.detach();
+	
 	// deallocate memory
 	for(int i = 0; i < SIZE; i++)
 	{
