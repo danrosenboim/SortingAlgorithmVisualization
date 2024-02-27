@@ -18,14 +18,19 @@ Visualizer::Visualizer() : window(sf::VideoMode(WIN_X, WIN_Y), "Sorting Visualiz
 
 		array[i] = curItem;
 	}
-
+	
 	// drawing the initial state of the list
 	draw();
 }
 
 Visualizer::~Visualizer()
 {
-
+	// deallocate memory
+	for(int i = 0; i < SIZE; i++)
+	{
+		delete array[i].line;
+	}
+	array.clear();
 }
 
 void Visualizer::draw()
@@ -39,4 +44,25 @@ void Visualizer::draw()
 		window.draw(*(array[i].line));
 	}
 	window.display();
+}
+
+void Visualizer::sort(void (*sortingFunction)(std::vector<Item>&))
+{
+	organizer = std::thread(sortingFunction, std::ref(array));
+}
+
+void Visualizer::show()
+{
+	while(window.isOpen())
+	{
+		sf::Event event;
+		while(window.pollEvent(event))
+		{
+			if(event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+		}
+		draw();
+	}
 }
